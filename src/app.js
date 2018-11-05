@@ -1,7 +1,10 @@
-/*const appFragment  = document.createDocumentFragment();
-const appContiner = document.createElement('div');
-appContiner.id = 'menu_app';
-appContiner.className = 'menu-app'
-appFragment.appendChild(appContiner)
-document.body.appendChild(appFragment);*/
-console.log(`I'm a silly entry point`);
+import React from 'react';
+import ReactDOM from 'react-dom'
+
+import { App } from './components/app';
+
+ReactDOM.render(
+    <App />,
+    document.getElementById('spa'),
+);
+

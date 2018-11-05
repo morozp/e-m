@@ -27,9 +27,17 @@ console.log('WEBPACK START')
 
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
-module.exports = {
-	module: {
+module.exports = {	
+	module: {		
 		rules: [
+			{
+				test: /\.(js|jsx)$/,
+				exclude: /node_modules/,
+				use: ['babel-loader'],
+				resolve: {
+					extensions: ['.js', '.jsx'],
+				}
+			},
 			{
 				test: /\.css$/,
 
@@ -64,11 +72,12 @@ module.exports = {
 	},
 
 	output: {
-		filename: '[name].[chunkhash].js',
+		filename: '[name].[hash].js',
 		path: path.resolve(__dirname, 'dist')
 	},
 
 	mode: 'development',
+	//devtool:'source-map',
 	plugins: [
 		new HtmlWebpackPlugin({
 			inject: true,
@@ -78,6 +87,7 @@ module.exports = {
 		}
 		),
 		new UglifyJSPlugin(),
+		new webpack.HotModuleReplacementPlugin(),
 	],
 
 	optimization: {
@@ -94,5 +104,9 @@ module.exports = {
 			minSize: 30000,
 			name: true
 		}
+	},
+	 devServer: {
+		contentBase: './dist',
+		hot: true
 	}
 };
