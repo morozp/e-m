@@ -27,15 +27,23 @@ console.log('WEBPACK START')
 
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
-module.exports = {	
-	module: {		
+module.exports = {
+	module: {
 		rules: [
+			{
+				test: /\.ts|tsx?$/,
+				use: ['ts-loader'],
+				exclude: /node_modules/,
+				resolve: {
+					extensions: ['.ts', '.tsx'],
+				}
+			},
 			{
 				test: /\.(js|jsx)$/,
 				exclude: /node_modules/,
 				use: ['babel-loader'],
 				resolve: {
-					extensions: ['.js', '.jsx'],
+					extensions: ['.js', '.jsx', '.ts', '.tsx'],
 				}
 			},
 			{
@@ -105,7 +113,7 @@ module.exports = {
 			name: true
 		}
 	},
-	 devServer: {
+	devServer: {
 		contentBase: './dist',
 		hot: true
 	}

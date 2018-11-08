@@ -1,12 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 
 const itemDescription = 'description';
 const itemTitle = 'item title';
 
-const TestComponent = (props) => {
+const TestComponent = (props: any) => {
     const { list = [], addItem, removeItem } = props;
     const addItemWrapper = () => {
+        debugger;
         addItem({ title: itemTitle, description: itemDescription });
     };
 
@@ -24,7 +25,7 @@ const TestComponent = (props) => {
 
         </div>
         <ul>
-            {list.map((item, index) => (
+            {list.map((item:any) => (
                 <li key={item.id}>
                     <p>{item.id}</p>
                     <p>{item.title}</p>
